@@ -32,6 +32,19 @@ export interface GBrainConfig {
   openai_api_key?: string;
   anthropic_api_key?: string;
   /**
+   * Embedding provider settings. Env vars still take precedence; this lets
+   * local brains choose an OpenAI-compatible proxy or local Ollama without
+   * hard-coding provider details into commands.
+   */
+  embeddings?: {
+    provider?: 'openai' | 'openrouter' | 'ollama';
+    model?: string;
+    dimensions?: number;
+    base_url?: string;
+    api_key?: string;
+    cost_per_1k_tokens?: number;
+  };
+  /**
    * Optional storage backend config (S3/Supabase/local). Shape matches
    * `StorageConfig` in `./storage.ts`. Typed as `unknown` here to avoid
    * a cyclic import; callers pass this through `createStorage()` which

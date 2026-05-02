@@ -660,6 +660,17 @@ FILES
 EMBEDDINGS
   gbrain embed [<slug>|--all|--stale]   Generate/refresh embeddings
 
+  Provider selection:
+    GBRAIN_EMBEDDING_PROVIDER=openai|openrouter|ollama
+    GBRAIN_EMBEDDING_MODEL=<model>
+    GBRAIN_EMBEDDING_API_KEY=<key>       Optional generic key override
+    OPENROUTER_API_KEY=<key>             Used when provider=openrouter
+    OLLAMA_HOST=http://127.0.0.1:11434   Used when provider=ollama
+
+  The current schema stores pgvector `vector(1536)`, so every provider must
+  return 1536-dimensional embeddings. OpenRouter uses its OpenAI-compatible
+  `/embeddings` API; Ollama uses `/api/embed`.
+
 LINKS + GRAPH
   gbrain link|unlink|backlinks          Cross-reference management
   gbrain extract links|timeline|all     Batch backfill from existing pages
